@@ -10,10 +10,10 @@ namespace pheide {
 namespace repository {
 
 class AbstractRepository {
-public:
+ public:
 	void connect();
 	std::string selectByTitle(std::string);
-private:
+ private:
 	MYSQL_RES *result;
 	MYSQL_ROW row;
 	MYSQL *connection, mysql;
