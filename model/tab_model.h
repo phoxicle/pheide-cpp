@@ -8,9 +8,10 @@ namespace pheide {
 namespace model {
 
 struct TabModel {
- public:
-	TabModel(std::string, std::string);
+	int uid;
+	int page_id;
 	std::string title;
+	std::string aside;
 	std::string content;
 };
 

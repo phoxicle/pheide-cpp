@@ -19,7 +19,7 @@ pheide::model::TabModel TabRepository::selectById(int page_id, int tab_id) {
 	}
 	*/
 	//std::string fields[] = {"uid", "pageid", "title", "aside", "content", "sorting", "type"};
-	pheide::model::TabModel tab_model(row[2], row[4]);
+	pheide::model::TabModel tab_model {tab_id, page_id, row[2], row[3], row[4]};
 
 	//pheide::model::TabModel tab_model("a title", "some content");
 	return tab_model;
