@@ -1,6 +1,9 @@
 #ifndef REPOSITORY_TAB_REPOSITORY_H_
 #define REPOSITORY_TAB_REPOSITORY_H_
 
+#include <iostream>
+#include <mysql.h>
+#include "dal.h"
 #include "../model/tab_model.h"
 
 namespace pheide {

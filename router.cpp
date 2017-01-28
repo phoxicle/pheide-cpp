@@ -1,6 +1,5 @@
 #include <iostream>
 #include "router.h"
-#include "repository/abstract_repository.h"
 #include "controller/tab_controller.h"
 
 namespace pheide {
