@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 #include <exception>
 #include <mysql.h>
 
@@ -12,9 +13,11 @@ namespace repository {
 
 class DAL {
  public:
-	MYSQL_RES* select(std::string, std::vector<std::string>, int, std::vector<std::string>);
+	MYSQL_RES* select(const std::string&, const std::vector<std::string>&, const std::map<std::string,std::string>&, const int, const std::vector<std::string>&);
  private:
-	MYSQL_RES* query(std::string);
+	MYSQL_RES* query(const std::string&);
+	std::string join(const std::vector<std::string>&, const std::string&);
+	std::vector<std::string> join(const std::map<std::string,std::string>&, const std::string&);
 };
 
 } // namespace repository

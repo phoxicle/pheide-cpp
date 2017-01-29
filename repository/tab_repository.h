@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <mysql.h>
+#include <map>
 #include "dal.h"
 #include "../model/tab_model.h"
 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <mysql.h>
+#include <map>
 #include "tab_repository.h"
 #include "dal.h"
 #include "../model/tab_model.h"
@@ -8,8 +9,14 @@ namespace pheide {
 namespace repository {
 
 pheide::model::TabModel TabRepository::selectById(int page_id, int tab_id) {
+
+	std::map<std::string,std::string> where {
+		{"uid", std::to_string(tab_id)},
+		{"pageid", std::to_string(page_id)}
+	};
+
 	DAL dal;
-	MYSQL_RES* result = dal.select("tab", std::vector<std::string>(), 1, std::vector<std::string>());
+	MYSQL_RES* result = dal.select("tab", {"*"}, where, 1, std::vector<std::string>());
 	// TODO use adaptor
 	MYSQL_ROW row = ::mysql_fetch_row(result);
 	/*
