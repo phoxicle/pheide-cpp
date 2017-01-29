@@ -6,6 +6,7 @@
 #include <map>
 #include "dal.h"
 #include "../model/tab_model.h"
+#include "../model/tab_model_adapter.h"
 
 namespace pheide {
 namespace repository {

@@ -13,7 +13,11 @@ namespace repository {
 
 class DAL {
  public:
+	// TODO ues builder
 	MYSQL_RES* select(const std::string&, const std::vector<std::string>&, const std::map<std::string,std::string>&, const int, const std::vector<std::string>&);
+	MYSQL_RES* select(const std::string&, const std::vector<std::string>&, const std::map<std::string,std::string>&, const int);
+	MYSQL_ROW selectOne(const std::string&, const std::vector<std::string>&, const std::map<std::string,std::string>&, const std::vector<std::string>&);
+	MYSQL_ROW selectOne(const std::string&, const std::vector<std::string>&, const std::map<std::string,std::string>&);
  private:
 	MYSQL_RES* query(const std::string&);
 	std::string join(const std::vector<std::string>&, const std::string&);

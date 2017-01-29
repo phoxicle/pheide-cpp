@@ -28,6 +28,19 @@ MYSQL_RES* DAL::select(const std::string& table, const std::vector<std::string>&
 	return query(q);
 }
 
+MYSQL_RES* DAL::select(const std::string& table, const std::vector<std::string>& fields, const std::map<std::string,std::string>& where, const int limit) {
+	return select(table, fields, where, limit, std::vector<std::string>());
+}
+
+MYSQL_ROW DAL::selectOne(const std::string& table, const std::vector<std::string>& fields, const std::map<std::string,std::string>& where, const std::vector<std::string>& sorting) {
+	MYSQL_RES* res = select(table, fields, where, 1, sorting);
+	return ::mysql_fetch_row(res);
+}
+
+MYSQL_ROW DAL::selectOne(const std::string& table, const std::vector<std::string>& fields, const std::map<std::string,std::string>& where) {
+	return selectOne(table, fields, where, std::vector<std::string>());
+}
+
 MYSQL_RES* DAL::query(const std::string& q) {
 	// Connect
 	MYSQL mysql;
