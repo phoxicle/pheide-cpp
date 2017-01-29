@@ -5,6 +5,7 @@
 #include <mysql.h>
 #include <map>
 #include "dal.h"
+#include "query_builder.h"
 #include "../model/tab_model.h"
 #include "../model/tab_model_adapter.h"
 
