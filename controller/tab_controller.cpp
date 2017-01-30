@@ -1,5 +1,6 @@
 #include <map>
 #include "tab_controller.h"
+#include "link_builder.h"
 #include "../repository/tab_repository.h"
 #include "../model/tab_model.h"
 #include "../view/renderer.h"
@@ -12,13 +13,13 @@ void TabController::show(int page_id, int tab_id) {
 	pheide::repository::TabRepository tab_repository;
 	pheide::model::TabModel tab_model = tab_repository.selectById(page_id, tab_id);
 
-
+	LinkBuilder link_builder;
 	pheide::view::Renderer renderer;
 	std::vector<pheide::model::TabModel> other_tabs = tab_repository.selectByPageId(page_id);
 	std::string tab_bar;
 	for (auto other_tab : other_tabs) {
 		tab_bar += renderer.render("tab.html", {
-			{"tab_link", "TODO"},
+			{"tab_link", link_builder.withAction("show").withPageId(page_id).withTabId(other_tab.uid).build()},
 			{"tab_title", other_tab.title}
 		});
 	}
