@@ -1,5 +1,5 @@
-#ifndef REPOSITORY_TAB_REPOSITORY_H_
-#define REPOSITORY_TAB_REPOSITORY_H_
+#ifndef PHEIDE_REPOSITORY_TAB_REPOSITORY_H_
+#define PHEIDE_REPOSITORY_TAB_REPOSITORY_H_
 
 #include <iostream>
 #include <mysql.h>
@@ -15,9 +15,10 @@ namespace repository {
 class TabRepository {
  public:
 	pheide::model::TabModel selectById(int, int);
+	std::vector<pheide::model::TabModel> selectByPageId(int);
 };
 
 } // namespace repository
 } // namespace pheide
 
-#endif // REPOSITORY_TAB_REPOSITORY_H_
+#endif // PHEIDE_REPOSITORY_TAB_REPOSITORY_H_

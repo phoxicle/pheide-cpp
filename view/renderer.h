@@ -10,7 +10,8 @@ namespace view {
 
 class Renderer {
  public:
-	void render(std::string, std::map<std::string, std::string>);
+	std::string render(std::string, std::map<std::string, std::string>);
+	std::string renderPage(std::string, std::map<std::string, std::string>);
  private:
 	void replace_vars(std::string&, const std::map<std::string, std::string>&);
 	std::string read_file(const std::string&);

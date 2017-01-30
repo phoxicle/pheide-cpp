@@ -6,21 +6,27 @@
 namespace pheide {
 namespace view {
 
-void Renderer::render(std::string template_name, std::map<std::string, std::string> vars) {
-	// Get template
+std::string Renderer::renderPage(std::string template_name, std::map<std::string, std::string> vars) {
+	// Get requested template
 	std::string body(read_file("templates/" + template_name));
 
-	// Add header and footer
+	// Get header and footer
 	std::string header(read_file("templates/header.html"));
 	std::string footer(read_file("templates/footer.html"));
 	std::string content = header + body + footer;
 
-	// Populate vars
+	// Populate remaining vars
 	replace_vars(content, vars);
 
 	// Output
-	std::cout << "Content-type:text/html\r\n\r\n";
-	std::cout << content;
+	content = "Content-type:text/html\r\n\r\n" + content;
+	return content;
+}
+
+std::string Renderer::render(std::string template_name, std::map<std::string, std::string> vars) {
+	std::string text(read_file("templates/" + template_name));
+	replace_vars(text, vars);
+	return text;
 }
 
 std::string Renderer::read_file(const std::string& path) {

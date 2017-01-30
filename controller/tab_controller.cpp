@@ -12,15 +12,26 @@ void TabController::show(int page_id, int tab_id) {
 	pheide::repository::TabRepository tab_repository;
 	pheide::model::TabModel tab_model = tab_repository.selectById(page_id, tab_id);
 
+
+	pheide::view::Renderer renderer;
+	std::vector<pheide::model::TabModel> other_tabs = tab_repository.selectByPageId(page_id);
+	std::string tab_bar;
+	for (auto other_tab : other_tabs) {
+		tab_bar += renderer.render("tab.html", {
+			{"tab_link", "TODO"},
+			{"tab_title", other_tab.title}
+		});
+	}
+
 	std::map<std::string, std::string> template_vars {
 		{"page_title", "PAGE TITLE PLACEHOLDER"},
 		{"tab_title", tab_model.title},
 		{"aside", tab_model.aside},
-		{"content", tab_model.content}
+		{"content", tab_model.content},
+		{"tab_bar", tab_bar}
 	};
 
-	pheide::view::Renderer renderer;
-	renderer.render("tab/show.html", template_vars);
+	std::cout << renderer.renderPage("tab/show.html", template_vars);
 }
 
 } // namespace controller

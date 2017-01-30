@@ -12,9 +12,9 @@ struct TabModelAdapter : TabModel {
 	TabModelAdapter(MYSQL_ROW row) {
 		uid = std::stoi(row[0]);
 		page_id = std::stoi(row[1]);
-		title = row[2];
-		aside = row[3];
-		content = row[4];
+		title = row[2] ?: "";
+		aside = row[3] ?: "";
+		content = row[4] ?: "";
 	}
 };
 
