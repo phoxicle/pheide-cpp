@@ -1,10 +1,10 @@
-#ifndef PHEIDE_REPOSITORY_LINK_BUILDER_H_
-#define PHEIDE_REPOSITORY_LINK_BUILDER_H_
+#ifndef PHEIDE_VIEW_LINK_BUILDER_H_
+#define PHEIDE_VIEW_LINK_BUILDER_H_
 
 #include <string>
 
 namespace pheide {
-namespace controller {
+namespace view {
 
 class LinkBuilder {
  public:
@@ -30,8 +30,8 @@ class LinkBuilder {
 	int tab_id;
 };
 
-} // namespace controller
+} // namespace view
 } // namespace pheide
 
-#endif // PHEIDE_REPOSITORY_LINK_BUILDER_H_
+#endif // PHEIDE_VIEW_LINK_BUILDER_H_
 

@@ -2,7 +2,7 @@
 #include "link_builder.h"
 
 namespace pheide {
-namespace controller {
+namespace view {
 
 std::string LinkBuilder::build() {
 	std::string s = "go?aoeu";
@@ -22,5 +22,5 @@ std::string LinkBuilder::build() {
 	return s;
 }
 
-} // namespace controller
+} // namespace view
 } // namespace pheide
