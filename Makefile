@@ -11,7 +11,7 @@ dal.o: repository/dal.cpp repository/dal.h
 query_builder.o: repository/query_builder.cpp repository/query_builder.h
 	$(CC) $(CPPFLAGS) -c -o query_builder.o repository/query_builder.cpp
 
-repository.o: repository/tab_repository.cpp repository/tab_repository.cpp
+repository.o: repository/tab_repository.cpp repository/tab_repository.h
 	$(CC) $(CPPFLAGS) $(LDFLAGS) -c -o repository.o repository/tab_repository.cpp
 
 link_builder.o: view/link_builder.cpp view/link_builder.h
@@ -20,7 +20,7 @@ link_builder.o: view/link_builder.cpp view/link_builder.h
 view.o: view/renderer.cpp view/renderer.h
 	$(CC) $(CPPFLAGS) -c -o view.o view/renderer.cpp
 
-controller.o: controller/tab_controller.cpp
+controller.o: controller/tab_controller.cpp controller/tab_controller.h
 	$(CC) $(CPPFLAGS) -c -o controller.o controller/tab_controller.cpp
 
 router.o: router.cpp router.h
