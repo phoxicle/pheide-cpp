@@ -20,7 +20,8 @@ void TabController::show(int page_id, int tab_id) {
 	for (auto other_tab : other_tabs) {
 		tab_bar += renderer.render("tab.html", {
 			{"tab_link", link_builder.withAction("show").withPageId(page_id).withTabId(other_tab.uid).build()},
-			{"tab_title", other_tab.title}
+			{"tab_title", other_tab.title},
+			{"tab_class", tab_id == other_tab.uid ? "activeTab" : ""}
 		});
 	}
 
