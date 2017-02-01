@@ -27,6 +27,27 @@ pheide::model::TabModel TabRepository::selectById(int page_id, int tab_id) {
 	return tab_model;
 }
 
+pheide::model::TabModel TabRepository::selectByDefault(int page_id) {
+
+	QueryBuilder builder;
+	DAL dal;
+	auto result = dal.queryRow(builder
+			.withTable("tab")
+			.withFields({"*"})
+			.withLimit(1)
+			.withWhere({
+					{"pageid", std::to_string(page_id)}
+				})
+			.withSorting({
+					{"sorting ASC"}
+				})
+			.build());
+	pheide::model::TabModel tab_model = pheide::model::TabModelAdapter(result);
+	return tab_model;
+}
+
+
+
 std::vector<pheide::model::TabModel> TabRepository::selectByPageId(int page_id) {
 	QueryBuilder builder;
 	DAL dal;
