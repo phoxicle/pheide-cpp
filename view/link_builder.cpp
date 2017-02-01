@@ -5,10 +5,10 @@ namespace pheide {
 namespace view {
 
 std::string LinkBuilder::build() {
-	std::string s = "go?aoeu";
+	std::string s = "?";
 
 	if (!action.empty()) {
-		s += "&action=" + action;
+		s += "action=" + action;
 	}
 
 	if (page_id > 0) {

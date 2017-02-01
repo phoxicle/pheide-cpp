@@ -1,7 +1,7 @@
 CC=g++
 CPPFLAGS=-std=c++11
-LDFLAGS=`mysql_config --include`
-LDLIBS=`mysql_config --libs`
+LDFLAGS=`mysql_config --include` -I/usr/local/include
+LDLIBS=`mysql_config --libs` -L/usr/local/lib -lcgicc
 
 all: pheide
 
@@ -24,7 +24,7 @@ controller.o: controller/tab_controller.cpp controller/tab_controller.h
 	$(CC) $(CPPFLAGS) -c -o controller.o controller/tab_controller.cpp
 
 router.o: router.cpp router.h
-	$(CC) $(CPPFLAGS) -c -o router.o router.cpp
+	$(CC) $(CPPFLAGS) $(LDFLAGS) -c -o router.o router.cpp
 
 main.o: main.cpp
 	$(CC) $(CPPFLAGS) -c -o main.o main.cpp
