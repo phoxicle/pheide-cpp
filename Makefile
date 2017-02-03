@@ -1,5 +1,5 @@
 CC=g++
-CPPFLAGS=-std=c++11
+CPPFLAGS=-std=c++11 -I/usr/local/include
 LDFLAGS=`mysql_config --include` -I/usr/local/include
 LDLIBS=`mysql_config --libs` -L/usr/local/lib -lcgicc
 
