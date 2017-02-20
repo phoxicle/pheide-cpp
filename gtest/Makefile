@@ -1,39 +1,3 @@
-#
-#  Makefile
-#  Pheide
-#
-
-CC := g++
-
-SRCDIR := src
-BUILDDIR := build
-TARGETDIR := bin
-TARGET := bin/pheide
-
-SRCEXT := cpp
-SOURCES := $(shell find $(SRCDIR) -type f -name '*.$(SRCEXT)')
-OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-
-CFLAGS := -std=c++11
-LIB := `mysql_config --libs` -L/usr/local/lib -lcgicc
-INC := `mysql_config --include` -I/usr/local/include
-
-$(TARGET): $(OBJECTS)
-	@mkdir -p $(TARGETDIR)
-	@echo " Linking..."
-	@echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
-
-$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
-	@mkdir -p $(BUILDDIR)/controller
-	@mkdir -p $(BUILDDIR)/view
-	@mkdir -p $(BUILDDIR)/repository
-	@echo " $(CC) $(CFLAGS) $(INC) -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) -c -o $@ $<
-
-clean:
-	@echo " Cleaning...";
-	@echo " $(RM) -r $(BUILDDIR) $(TARGET)"; $(RM) -r $(BUILDDIR) $(TARGET)
-	@echo " $(RM) -f $(TESTS) gtest.a gtest_main.a *.o"; $(RM) -f $(TESTS) gtest.a gtest_main.a *.o
-
 # A sample Makefile for building Google Test and using it in user
 # tests.  Please tweak it to suit your environment and project.  You
 # may want to move it to your project's root directory.
@@ -50,7 +14,7 @@ clean:
 
 # Points to the root of Google Test, relative to where this file is.
 # Remember to tweak this if you move this file.
-GTEST_DIR = ./gtest
+GTEST_DIR = .
 
 # Where to find user code.
 USER_DIR = ./samples
@@ -74,8 +38,10 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 
 # House-keeping build targets.
 
-test : $(TESTS)
+all : $(TESTS)
 
+clean :
+	rm -f $(TESTS) gtest.a gtest_main.a *.o
 
 # Builds gtest.a and gtest_main.a.
 
