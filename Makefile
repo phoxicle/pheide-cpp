@@ -24,6 +24,7 @@ $(TARGET): $(OBJECTS)
 	@echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
+	@echo " Building..."
 	@mkdir -p $(BUILDDIR)/controller
 	@mkdir -p $(BUILDDIR)/view
 	@mkdir -p $(BUILDDIR)/repository
@@ -53,7 +54,7 @@ clean:
 GTEST_DIR = ./gtest
 
 # Where to find user code.
-USER_DIR = ./samples
+USER_DIR = src
 
 # Flags passed to the preprocessor.
 # Set Google Test's header directory as a system directory, such that
@@ -61,11 +62,11 @@ USER_DIR = ./samples
 CPPFLAGS += -isystem $(GTEST_DIR)/include
 
 # Flags passed to the C++ compiler.
-CXXFLAGS += -g -Wall -Wextra -pthread
+CXXFLAGS += -g -Wall -Wextra
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
-TESTS = sample1_unittest
+TESTS = $(BUILDDIR)/view/link_builder_test
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -88,29 +89,32 @@ GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
 # conservative and not optimized.  This is fine as Google Test
 # compiles fast and for ordinary users its source rarely changes.
 gtest-all.o : $(GTEST_SRCS_)
+	@echo "Building gtest-all.o"
 	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
             $(GTEST_DIR)/src/gtest-all.cc
 
 gtest_main.o : $(GTEST_SRCS_)
+	@echo "Building gtest-main.o"
 	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
             $(GTEST_DIR)/src/gtest_main.cc
 
 gtest.a : gtest-all.o
+	@echo "Building gtest.a"
 	$(AR) $(ARFLAGS) $@ $^
 
 gtest_main.a : gtest-all.o gtest_main.o
+	@echo "Building gtest_main.a"
 	$(AR) $(ARFLAGS) $@ $^
 
 # Builds a sample test.  A test should link with either gtest.a or
 # gtest_main.a, depending on whether it defines its own main()
 # function.
 
-sample1.o : $(USER_DIR)/sample1.cc $(USER_DIR)/sample1.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/sample1.cc
+#view/link_builder_test.o : $(USER_DIR)/view/link_builder_test.cc
+$(BUILDDIR)/view/link_builder_test.o : $(GTEST_HEADERS)
+	@echo " Building tests"
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(INC) -c $(SRCDIR)/view/link_builder_test.cc -o $@
 
-sample1_unittest.o : $(USER_DIR)/sample1_unittest.cc \
-                     $(USER_DIR)/sample1.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/sample1_unittest.cc
-
-sample1_unittest : sample1.o sample1_unittest.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+$(BUILDDIR)/view/link_builder_test : $(BUILDDIR)/view/link_builder.o $(BUILDDIR)/view/link_builder_test.o gtest_main.a
+	@echo " Building executable"
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(INC)  -lpthread $^ -o $@
