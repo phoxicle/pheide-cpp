@@ -81,5 +81,6 @@ $(BUILDDIR)/%_test.o : $(SRCDIR)/%_test.cc $(GTEST_HEADERS)
 
 $(BUILDDIR)/%_test : $(BUILDDIR)/%.o $(BUILDDIR)/%_test.o gtest_main.a
 	@echo "[5]  $(CXX) $(CPPFLAGS) $(CXXFLAGS) $(INC) -lpthread $^ -o $@"; $(CXX) $(CPPFLAGS) $(CXXFLAGS) $(INC) -lpthread $^ -o $@
+	$@
 
 
