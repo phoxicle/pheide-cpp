@@ -11,7 +11,7 @@ namespace pheide {
 
 class Router {
 public:
-	void Route();
+	void route();
 };
 
 } // namespace pheide

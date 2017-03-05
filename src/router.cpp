@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 #include <cgicc/CgiDefs.h>
 #include <cgicc/Cgicc.h>
 #include <cgicc/HTTPHTMLHeader.h>
@@ -11,7 +12,7 @@
 
 namespace pheide {
 
-void Router::Route() {
+void Router::route() {
 	cgicc::Cgicc cgi;
 
 	// Parameters
@@ -37,10 +38,9 @@ void Router::Route() {
 
 	// Call action
 	controller::Factory factory;
-	controller::BaseController* controller = factory.get(controller_name);
-	controller->doAction(action, params);
-	// TODO use smart pointers.
-	delete controller;
+	std::unique_ptr<controller::BaseController> c_ptr(nullptr);
+	c_ptr.reset(factory.get(controller_name));
+	c_ptr->doAction(action, params);
 }
 
 } // namespace pheide
