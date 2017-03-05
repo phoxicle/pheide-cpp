@@ -9,9 +9,9 @@ namespace repository {
 
 class PageRepository {
  public:
-	std::vector<pheide::model::PageModel> selectAll();
-	pheide::model::PageModel selectById(int);
-	pheide::model::PageModel selectByDefault();
+	std::vector<model::PageModel> selectAll();
+	model::PageModel selectById(int);
+	model::PageModel selectByDefault();
 };
 
 } // namespace repository

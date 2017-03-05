@@ -11,7 +11,7 @@ namespace pheide {
 namespace repository {
 
 
-std::vector<pheide::model::PageModel> PageRepository::selectAll() {
+std::vector<model::PageModel> PageRepository::selectAll() {
 	QueryBuilder builder;
 	DAL dal;
 
@@ -20,16 +20,16 @@ std::vector<pheide::model::PageModel> PageRepository::selectAll() {
 			.withFields({"*"})
 			.build());
 
-	std::vector<pheide::model::PageModel> pages;
+	std::vector<model::PageModel> pages;
 	MYSQL_ROW row;
 	while ((row = ::mysql_fetch_row(result))) {
-		pages.push_back(pheide::model::PageModelAdapter(row));
+		pages.push_back(model::PageModelAdapter(row));
 	}
 
 	return pages;
 }
 
-pheide::model::PageModel PageRepository::selectById(int id) {
+model::PageModel PageRepository::selectById(int id) {
 	QueryBuilder builder;
 	DAL dal;
 
@@ -41,13 +41,13 @@ pheide::model::PageModel PageRepository::selectById(int id) {
 					{"uid", std::to_string(id)}
 				})
 			.build());
-	pheide::model::PageModel page_model = pheide::model::PageModelAdapter(result);
+	model::PageModel page_model = model::PageModelAdapter(result);
 
 	return page_model;
 }
 
 
-pheide::model::PageModel PageRepository::selectByDefault() {
+model::PageModel PageRepository::selectByDefault() {
 	QueryBuilder builder;
 	DAL dal;
 
@@ -59,7 +59,7 @@ pheide::model::PageModel PageRepository::selectByDefault() {
 					{"isdefault", "1"}
 				})
 			.build());
-	pheide::model::PageModel page_model = pheide::model::PageModelAdapter(result);
+	model::PageModel page_model = model::PageModelAdapter(result);
 
 	return page_model;
 }

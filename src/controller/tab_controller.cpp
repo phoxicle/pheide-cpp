@@ -16,14 +16,14 @@ void TabController::doAction(std::string action, std::map<std::string,std::strin
 }
 
 void TabController::show(int page_id, int tab_id) {
-	pheide::repository::PageRepository page_repository;
-	pheide::repository::TabRepository tab_repository;
+	repository::PageRepository page_repository;
+	repository::TabRepository tab_repository;
 
-	pheide::view::LinkBuilder link_builder;
-	pheide::view::Renderer renderer;
+	view::LinkBuilder link_builder;
+	view::Renderer renderer;
 
 	// Build the header
-	std::vector<pheide::model::PageModel> other_pages = page_repository.selectAll();
+	std::vector<model::PageModel> other_pages = page_repository.selectAll();
 	std::string header_images;
 	for (auto other_page : other_pages) {
 		header_images += renderer.render("header_image.html", {
@@ -35,7 +35,7 @@ void TabController::show(int page_id, int tab_id) {
 
 
 	// Build the tab bar
-	std::vector<pheide::model::TabModel> other_tabs = tab_repository.selectByPageId(page_id);
+	std::vector<model::TabModel> other_tabs = tab_repository.selectByPageId(page_id);
 	std::string tab_bar;
 	for (auto other_tab : other_tabs) {
 		tab_bar += renderer.render("tab.html", {
@@ -47,10 +47,10 @@ void TabController::show(int page_id, int tab_id) {
 
 	// Get the Page object
 	// TODO check number of queries being executed
-	pheide::model::PageModel page_model = page_repository.selectById(page_id);
+	model::PageModel page_model = page_repository.selectById(page_id);
 
 	// Get the Tab object
-	pheide::model::TabModel tab_model = tab_repository.selectById(page_id, tab_id);
+	model::TabModel tab_model = tab_repository.selectById(page_id, tab_id);
 
 	std::map<std::string, std::string> template_vars {
 		{"page_title", page_model.title},

@@ -10,7 +10,7 @@
 namespace pheide {
 namespace repository {
 
-pheide::model::TabModel TabRepository::selectById(int page_id, int tab_id) {
+model::TabModel TabRepository::selectById(int page_id, int tab_id) {
 
 	QueryBuilder builder;
 	DAL dal;
@@ -23,11 +23,11 @@ pheide::model::TabModel TabRepository::selectById(int page_id, int tab_id) {
 					{"pageid", std::to_string(page_id)}
 				})
 			.build());
-	pheide::model::TabModel tab_model = pheide::model::TabModelAdapter(result);
+	model::TabModel tab_model = model::TabModelAdapter(result);
 	return tab_model;
 }
 
-pheide::model::TabModel TabRepository::selectByDefault(int page_id) {
+model::TabModel TabRepository::selectByDefault(int page_id) {
 
 	QueryBuilder builder;
 	DAL dal;
@@ -42,13 +42,13 @@ pheide::model::TabModel TabRepository::selectByDefault(int page_id) {
 					{"sorting ASC"}
 				})
 			.build());
-	pheide::model::TabModel tab_model = pheide::model::TabModelAdapter(result);
+	model::TabModel tab_model = model::TabModelAdapter(result);
 	return tab_model;
 }
 
 
 
-std::vector<pheide::model::TabModel> TabRepository::selectByPageId(int page_id) {
+std::vector<model::TabModel> TabRepository::selectByPageId(int page_id) {
 	QueryBuilder builder;
 	DAL dal;
 	auto result = dal.query(builder
@@ -60,10 +60,10 @@ std::vector<pheide::model::TabModel> TabRepository::selectByPageId(int page_id) 
 			.withSorting({"sorting ASC"})
 			.build());
 
-	std::vector<pheide::model::TabModel> ret;
+	std::vector<model::TabModel> ret;
 	MYSQL_ROW row;
 	while ((row = ::mysql_fetch_row(result))) {
-		ret.push_back(pheide::model::TabModelAdapter(row));
+		ret.push_back(model::TabModelAdapter(row));
 	}
 
 	return ret;

@@ -21,15 +21,15 @@ void PageController::doAction(std::string action, std::map<std::string,std::stri
 
 
 void PageController::show() {
-	pheide::repository::PageRepository page_repository;
-	pheide::model::PageModel page_model = page_repository.selectByDefault();
+	repository::PageRepository page_repository;
+	model::PageModel page_model = page_repository.selectByDefault();
 
 	show(page_model.uid);
 }
 
 void PageController::show(int page_id) {
-	pheide::repository::TabRepository tab_repository;
-	pheide::model::TabModel tab_model = tab_repository.selectByDefault(page_id);
+	repository::TabRepository tab_repository;
+	model::TabModel tab_model = tab_repository.selectByDefault(page_id);
 
 	TabController tab_controller;
 	tab_controller.show(page_id, tab_model.uid);

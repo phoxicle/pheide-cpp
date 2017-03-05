@@ -14,9 +14,9 @@ namespace repository {
 
 class TabRepository {
  public:
-	pheide::model::TabModel selectById(int, int);
-	pheide::model::TabModel selectByDefault(int);
-	std::vector<pheide::model::TabModel> selectByPageId(int);
+	model::TabModel selectById(int, int);
+	model::TabModel selectByDefault(int);
+	std::vector<model::TabModel> selectByPageId(int);
 };
 
 } // namespace repository
