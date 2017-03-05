@@ -2,6 +2,9 @@
 #  Makefile
 #  Pheide
 #
+#  Mac CGI executable path:
+#  cp bin/pheide /Library/WebServer/CGI-Executables/
+#
 
 CC := g++
 

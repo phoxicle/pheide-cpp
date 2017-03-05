@@ -27,7 +27,7 @@ void TabController::show(int page_id, int tab_id) {
 	std::string header_images;
 	for (auto other_page : other_pages) {
 		header_images += renderer.render("header_image.html", {
-			{"link", link_builder.withAction("show").withPageId(other_page.uid).build()},
+			{"link", link_builder.withController("page").withAction("show").withPageId(other_page.uid).build()},
 			{"css_id", other_page.header_id},
 			{"title", other_page.title}
 		});
@@ -39,7 +39,7 @@ void TabController::show(int page_id, int tab_id) {
 	std::string tab_bar;
 	for (auto other_tab : other_tabs) {
 		tab_bar += renderer.render("tab.html", {
-			{"tab_link", link_builder.withAction("show").withPageId(page_id).withTabId(other_tab.uid).build()},
+			{"tab_link", link_builder.withController("tab").withAction("show").withPageId(page_id).withTabId(other_tab.uid).build()},
 			{"tab_title", other_tab.title},
 			{"tab_class", tab_id == other_tab.uid ? "activeTab" : ""}
 		});

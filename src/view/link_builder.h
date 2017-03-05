@@ -8,6 +8,11 @@ namespace view {
 
 class LinkBuilder {
  public:
+	LinkBuilder& withController(const std::string& s) {
+		controller = s;
+		return *this;
+	}
+
 	LinkBuilder& withAction(const std::string& s) {
 		action = s;
 		return *this;
@@ -25,6 +30,7 @@ class LinkBuilder {
 
 	std::string build();
  private:
+	std::string controller;
 	std::string action;
 	int page_id;
 	int tab_id;
