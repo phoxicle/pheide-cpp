@@ -1,24 +1,27 @@
 #include "link_builder.h"
 #include "gtest/gtest.h"
 
+using namespace pheide;
+
 TEST(LinkBuilderTest, AllParams) {
 	// GIVEN
-	auto builder = pheide::view::LinkBuilder();
+	auto builder = view::LinkBuilder();
 
 	// WHEN
 	std::string link = builder
+		.withController("bar")
 		.withAction("foo")
 		.withPageId(1)
 		.withTabId(2)
 		.build();
 
 	// THEN
-	EXPECT_EQ("?action=foo&page_id=1&tab_id=2", link);
+	EXPECT_EQ("?controller=bar&action=foo&page_id=1&tab_id=2&", link);
 }
 
-TEST(LinkBuilderTest, NoTabId) {
+TEST(LinkBuilderTest, SomeParams) {
 	// GIVEN
-	auto builder = pheide::view::LinkBuilder();
+	auto builder = view::LinkBuilder();
 
 	// WHEN
 	std::string link = builder
@@ -27,12 +30,12 @@ TEST(LinkBuilderTest, NoTabId) {
 		.build();
 
 	// THEN
-	EXPECT_EQ("?action=foo&page_id=1", link);
+	EXPECT_EQ("?action=foo&page_id=1&", link);
 }
 
 TEST(LinkBuilderTest, EmptyParams) {
 	// GIVEN
-	auto builder = pheide::view::LinkBuilder();
+	auto builder = view::LinkBuilder();
 
 	// WHEN
 	std::string link = builder
