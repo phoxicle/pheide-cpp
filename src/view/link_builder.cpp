@@ -15,10 +15,6 @@ std::string LinkBuilder::build() {
 		s += "action=" + action + "&";
 	}
 
-	if (!action.empty()) {
-		s += "action=" + action + "&";
-	}
-
 	if (page_id > 0) {
 		s += "page_id=" + std::to_string(page_id) + "&";
 	}

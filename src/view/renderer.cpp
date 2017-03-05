@@ -7,6 +7,10 @@ namespace pheide {
 namespace view {
 
 std::string Renderer::renderPage(std::string template_name, std::map<std::string, std::string> vars) {
+	return renderPage(template_name, vars, "");
+}
+
+std::string Renderer::renderPage(std::string template_name, std::map<std::string, std::string> vars, std::string additional_headers) {
 	// Get requested template
 	std::string body(read_file("templates/" + template_name));
 
@@ -19,7 +23,9 @@ std::string Renderer::renderPage(std::string template_name, std::map<std::string
 	replace_vars(content, vars);
 
 	// Output
-	content = "Content-type:text/html\r\n\r\n" + content;
+	content = additional_headers
+			+ "Content-type:text/html\r\n\r\n"
+			+ content;
 	return content;
 }
 

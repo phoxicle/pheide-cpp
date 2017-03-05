@@ -19,10 +19,14 @@ void Router::Route() {
 	std::string action = cgi("action");
 	std::string page_id = cgi("page_id");
 	std::string tab_id = cgi("tab_id");
+	std::string username = cgi("username");
+	std::string password = cgi("password");
 
 	std::map<std::string,std::string> params = {
 		{"page_id", page_id},
-		{"tab_id", tab_id}
+		{"tab_id", tab_id},
+		{"username", username},
+		{"password", password}
 	};
 
 	// Default is Page::show
