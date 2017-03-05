@@ -9,6 +9,17 @@
 namespace pheide {
 namespace controller {
 
+void PageController::doAction(std::string action, std::map<std::string,std::string> params) {
+	if (action == "show") {
+		if (params["page_id"].empty()) {
+			show();
+		} else {
+			show(std::stoi(params["page_id"]));
+		}
+	}
+}
+
+
 void PageController::show() {
 	pheide::repository::PageRepository page_repository;
 	pheide::model::PageModel page_model = page_repository.selectByDefault();

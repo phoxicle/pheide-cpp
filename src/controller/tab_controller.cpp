@@ -9,6 +9,12 @@
 namespace pheide {
 namespace controller {
 
+void TabController::doAction(std::string action, std::map<std::string,std::string> params) {
+	if (action == "show") {
+		show(std::stoi(params["page_id"]), std::stoi(params["tab_id"]));
+	}
+}
+
 void TabController::show(int page_id, int tab_id) {
 	pheide::repository::PageRepository page_repository;
 	pheide::repository::TabRepository tab_repository;
