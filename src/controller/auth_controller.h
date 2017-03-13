@@ -9,7 +9,7 @@ namespace controller {
 
 class AuthController : public BaseController {
  public:
-	void doAction(std::string, std::map<std::string,std::string>);
+	void doAction(std::string, std::map<std::string,std::string>, bool);
 	void login();
 	void logout();
 	void authenticate(std::string,std::string);

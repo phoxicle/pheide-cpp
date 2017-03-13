@@ -8,9 +8,9 @@ namespace controller {
 
 class PageController : public BaseController {
  public:
-	void doAction(std::string, std::map<std::string,std::string>);
-	void show();
-	void show(int);
+	void doAction(std::string, std::map<std::string,std::string>, bool);
+	void show(bool);
+	void show(int, bool);
 };
 
 } // namespace controller

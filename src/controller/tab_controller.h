@@ -12,8 +12,8 @@ namespace controller {
 
 class TabController : public BaseController {
  public:
-	void doAction(std::string, std::map<std::string,std::string>);
-	void show(int, int);
+	void doAction(std::string, std::map<std::string,std::string>, bool);
+	void show(int, int, bool);
 };
 
 } // namespace controller

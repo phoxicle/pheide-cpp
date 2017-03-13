@@ -38,6 +38,9 @@ std::string Renderer::render(std::string template_name, std::map<std::string, st
 std::string Renderer::read_file(const std::string& path) {
 	std::ifstream file(path);
 	std::string contents((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+	if (contents.size() == 0) {
+		throw std::logic_error("Template file '" + path + "' not found");
+	}
 	return contents;
 }
 

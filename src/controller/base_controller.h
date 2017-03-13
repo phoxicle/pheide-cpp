@@ -9,7 +9,7 @@ namespace controller {
 
 class BaseController {
  public:
-	virtual void doAction(std::string, std::map<std::string,std::string>) = 0;
+	virtual void doAction(std::string, std::map<std::string,std::string>, bool) = 0;
 	virtual ~BaseController(){};
 };
 

@@ -9,6 +9,7 @@
 #include "controller/base_controller.h"
 #include "controller/page_controller.h"
 #include "controller/tab_controller.h"
+#include "controller/authenticator.h"
 
 namespace pheide {
 
@@ -23,11 +24,22 @@ void Router::route() {
 	std::string username = cgi("username");
 	std::string password = cgi("password");
 
+	// Get cookies and check authentication
+	controller::Authenticator authenticator;
+	std::string cookie_value;
+	cgicc::const_cookie_iterator cci;
+	const cgicc::CgiEnvironment& env = cgi.getEnvironment();
+	for( cci = env.getCookieList().begin(); cci != env.getCookieList().end(); ++cci ) {
+		if (cci->getName() == authenticator.COOKIE_NAME) {
+			authenticator.authenticate(cci->getValue());
+		}
+	}
+
 	std::map<std::string,std::string> params = {
 		{"page_id", page_id},
 		{"tab_id", tab_id},
 		{"username", username},
-		{"password", password}
+		{"password", password},
 	};
 
 	// Default is Page::show
@@ -40,7 +52,7 @@ void Router::route() {
 	controller::Factory factory;
 	std::unique_ptr<controller::BaseController> c_ptr(nullptr);
 	c_ptr.reset(factory.get(controller_name));
-	c_ptr->doAction(action, params);
+	c_ptr->doAction(action, params, authenticator.isAuthenticated());
 }
 
 } // namespace pheide
